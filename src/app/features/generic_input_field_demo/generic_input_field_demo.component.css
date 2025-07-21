@@ -1,0 +1,27 @@
+.demo-section {
+  margin-bottom: 2.2rem;
+}
+
+.demo-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1976d2;
+  font-size: 1.05rem;
+}
+
+.demo-row {
+  margin-bottom: 1.5rem;
+  max-width: 480px;
+}
+
+.my-bio-textarea {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-radius: 0.6em !important;
+}
+
+@media (max-width: 600px) {
+  .demo-row {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,62 @@
+<div
+  *ngIf="isOpen"
+  class="modal-overlay {{overlayClass || ''}}"
+  [ngStyle]="overlayStyle"
+  [ngClass]="animation"
+  tabindex="-1">
+  <div
+    #modalDialog
+    class="modal-dialog {{position}} {{size}} {{customClass || ''}}"
+    [ngStyle]="mergedModalStyles"
+    tabindex="0"
+    role="dialog"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-describedby]="ariaDescribedBy">
+
+    <div
+      #mainContent
+      class="modal-content"
+      [class.no-padding]="noPaddingContent"
+      [class.scrollable]="scrollableContent"
+      [attr.id]="ariaDescribedBy || null">
+      <div
+        class="modal-header {{headerClass || ''}}"
+        *ngIf="title || icon || showClose">
+        <i *ngIf="icon" [class]="icon + ' modal-icon'"></i>
+        <span class="modal-title" *ngIf="title"
+          [attr.id]="ariaLabelledBy || null">{{ title }}</span>
+        <ng-content select="[header-actions]"></ng-content>
+        <button
+          *ngIf="showClose"
+          class="modal-close"
+          (click)="close()"
+          aria-label="Close dialog"
+          [disabled]="loading">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <ng-content></ng-content>
+      <div
+        class="modal-footer {{footerClass || ''}}"
+        *ngIf="showFooter">
+        <ng-content select="[footer-actions]"></ng-content>
+        <button
+          class="modal-btn cancel"
+          (click)="onCancel()"
+          [disabled]="disableCancel || loading"
+          *ngIf="cancelText">
+          {{ cancelText }}
+        </button>
+        <button
+          class="modal-btn ok"
+          (click)="onOk()"
+          [disabled]="disableOk || loading"
+          *ngIf="okText">
+          <span *ngIf="loading" class="btn-spinner"></span>
+          {{ okText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

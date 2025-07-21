@@ -1,0 +1,95 @@
+.generic-input-wrapper {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-weight: 500;
+  margin-bottom: 0.35em;
+  color: #1976d2;
+  font-size: 1rem;
+}
+.input-label.required:after {
+  content: " *";
+  color: #e53935;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #c4c4c4;
+  border-radius: 0.5em;
+  background: #fff;
+  transition: border-color 0.16s, box-shadow 0.18s;
+  padding: 0.35em 0.8em;
+  position: relative;
+}
+.input-row:focus-within {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px #1976d262;
+}
+.input-row.with-icon {
+  padding-left: 0.3em;
+}
+
+.generic-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1 1 0%;
+  font-size: 1.05rem;
+  padding: 0.5em 0.1em;
+  min-width: 0;
+  color: #263238;
+  font-family: inherit;
+  resize: none;
+}
+.generic-input:disabled,
+.generic-input[readonly] {
+  background: #f1f3f7;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.input-icon {
+  font-size: 1.15em;
+  color: #b7b7b7;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  transition: color 0.15s;
+  cursor: default;
+  user-select: none;
+}
+.input-icon.prefix {
+  margin-right: 0.8em;
+  margin-left: 0;
+}
+.input-icon.suffix {
+  margin-left: 0.8em;
+  margin-right: 0;
+}
+.toggle-password {
+  cursor: pointer;
+  color: #1976d2;
+  margin-left: 0.4em;
+  margin-right: 0;
+}
+.toggle-password:focus {
+  outline: 2px solid #1976d2;
+}
+
+.input-helper {
+  color: #6b7a90;
+  font-size: 0.93em;
+  margin-top: 0.28em;
+}
+.input-error {
+  color: #e53935;
+  font-size: 0.95em;
+  margin-top: 0.22em;
+}
+.input-validation-error{
+  border-color: red;
+}

@@ -1,0 +1,104 @@
+<div [class]="config.themeClass || ''" class="gen-table-root" [class.striped]="config.striped" [class.bordered]="config.bordered" [class.dense]="config.dense" [class.responsive]="config.responsive">
+  <div *ngIf="config.loading" class="table-loading">Loading...</div>
+  <table>
+    <thead [class.sticky]="config.stickyHeader">
+      <tr>
+        <th *ngIf="config.selection!=='none'"></th>
+        <th *ngIf="config.showIndex">#</th>
+        <ng-container *ngFor="let col of config.columns">
+          <th
+            *ngIf="!col.hidden"
+            [style.width]="col.width"
+            [style.text-align]="col.align"
+            [class.sticky]="col.sticky"
+            [class]="col.class"
+            [ngStyle]="col.style"
+            (click)="sort(col)"
+          >
+            <ng-container *ngIf="!col.headerTemplate">{{col.header}}</ng-container>
+            <ng-container *ngTemplateOutlet="col.headerTemplate"></ng-container>
+            <span *ngIf="col.sortable" class="sort-indicator">
+              <span *ngIf="sortKey===col.key">{{sortAsc?'▲':'▼'}}</span>
+            </span>
+          </th>
+        </ng-container>
+        <th *ngIf="config.actions?.length">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let row of pagedData; let i = index">
+        <tr [class.selected]="isRowSelected(row)">
+          <td *ngIf="config.selection!=='none'">
+            <input type="checkbox" [checked]="isRowSelected(row)" (change)="toggleRow(row)">
+          </td>
+          <td *ngIf="config.showIndex">{{((page-1)*pageSize)+i+1}}</td>
+          <ng-container *ngFor="let col of config.columns">
+            <td
+              *ngIf="!col.hidden"
+              [style.text-align]="col.align"
+              [class]="col.class"
+              [ngStyle]="col.style"
+            >
+              <!-- Custom cell template -->
+              <ng-container *ngIf="col.cellTemplate; else defaultCell">
+                <ng-container *ngTemplateOutlet="col.cellTemplate; context:{ $implicit: row, column: col }"></ng-container>
+              </ng-container>
+              <ng-template #defaultCell>
+                <!-- Cell types -->
+                <ng-container [ngSwitch]="col.type">
+                  <span *ngSwitchCase="'icon'"><i [class]="cellValue(row, col)"></i></span>
+                  <span *ngSwitchCase="'badge'" [style.background]="col.badgeColor?.(row)">{{cellValue(row, col)}}</span>
+                  <span *ngSwitchCase="'avatar'"><img [src]="cellValue(row, col)" class="avatar"></span>
+                  <span *ngSwitchCase="'chip'" class="chip" [style.background]="col.badgeColor?.(row)">{{cellValue(row, col)}}</span>
+                  <span *ngSwitchCase="'boolean'">{{cellValue(row, col) ? '✔' : '✖'}}</span>
+                  <span *ngSwitchCase="'progress'">
+                    <div class="progress-bar">
+                      <div class="progress-fill" [style.width.%]="cellValue(row, col)"></div>
+                    </div>
+                  </span>
+                  <button *ngSwitchCase="'action'" (click)="col.customRender?.(row, col)">Action</button>
+                  <span *ngSwitchDefault>{{cellValue(row, col)}}</span>
+                </ng-container>
+              </ng-template>
+            </td>
+          </ng-container>
+          <td *ngIf="config.actions?.length">
+            <ng-container *ngFor="let action of config.actions">
+              <button
+                *ngIf="!action.show || action.show(row)"
+                [disabled]="action.disabled?.(row)"
+                [class]="action.class"
+                [style.background]="action.color"
+                [attr.title]="action.tooltip"
+                (click)="action.handler(row)"
+              >
+                <i *ngIf="action.icon" [class]="action.icon"></i> {{action.label}}
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+        <!-- Expandable row directly after the main row, inside the *ngFor -->
+        <tr *ngIf="config.expandableRows && isExpanded(row)">
+          <td [attr.colspan]="config.columns.length + (config.selection!=='none'?1:0) + (config.showIndex?1:0) + (config.actions?.length?1:0)">
+            <ng-container *ngTemplateOutlet="config.expandedTemplate; context:{ $implicit: row }"></ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div *ngIf="config.pagination" class="pagination">
+    <button (click)="page=1" [disabled]="page===1">«</button>
+    <button (click)="page=page-1" [disabled]="page===1">‹</button>
+    <span>Page {{page}} / {{Math.ceil(config.data.length/pageSize)}}</span>
+    <button (click)="page=page+1" [disabled]="page===Math.ceil(config.data.length/pageSize)">›</button>
+    <button (click)="page=Math.ceil(config.data.length/pageSize)" [disabled]="page===Math.ceil(config.data.length/pageSize)">»</button>
+    <select [(ngModel)]="pageSize" *ngIf="config.pageSizeOptions">
+      <option *ngFor="let s of config.pageSizeOptions" [value]="s">{{s}}</option>
+    </select>
+  </div>
+  <div *ngIf="!config.data.length && !config.loading" class="table-empty">
+    {{config.noDataText || 'No data'}}
+  </div>
+</div>

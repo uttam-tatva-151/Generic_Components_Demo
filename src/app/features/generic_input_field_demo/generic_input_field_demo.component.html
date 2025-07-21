@@ -1,0 +1,57 @@
+<!-- Basic input, required, with icon -->
+<app-generic-input-field
+  label="Full Name"
+  name="username"
+  placeholder="Enter your name"
+  icon="fa-solid fa-user"
+  [required]="true"
+  helperText="Your real name"
+  (valueChange)="onNameChange($event)">
+</app-generic-input-field>
+
+<!-- Email, validation, custom error message -->
+<app-generic-input-field
+  label="Email"
+  name="useremail"
+  type="email"
+  icon="fa-solid fa-envelope"
+  [required]="true"
+  errorText="Please enter a valid email!"
+  (valueChange)="onEmailChange($event)">
+</app-generic-input-field>
+
+<!-- Password with toggle, min length -->
+<app-generic-input-field
+  label="Password"
+  name="pwd"
+  type="password"
+  [minLength]="8"
+  [required]="true"
+  [showTogglePassword]="true"
+  icon="fa-solid fa-lock"
+  (valueChange)="onPwdChange($event)">
+</app-generic-input-field>
+
+<!-- Number input with min/max -->
+<app-generic-input-field
+  label="Age"
+  name="age"
+  type="number"
+  [min]="18"
+  [max]="120"
+  icon="fa-solid fa-hashtag"
+  (valueChange)="onAgeChange($event)">
+</app-generic-input-field>
+
+<!-- Textarea, custom class/style -->
+<app-generic-input-field
+  label="Bio"
+  name="bio"
+  type="textarea"
+  [rows]="4"
+  icon="fa-solid fa-info-circle"
+  customClass="my-bio-textarea"
+  [customStyle]="{'background':'#f7faff', 'borderColor':'#1976d2'}"
+  helperText="Tell us about yourself..."
+  (valueChange)="onBioChange($event)">
+</app-generic-input-field>

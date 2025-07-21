@@ -1,0 +1,19 @@
+.modal-examples-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em 1.1em;
+  margin-bottom: 2em;
+}
+.open-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.4em;
+  padding: 0.7em 1.3em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 0.6em;
+  transition: background 0.14s;
+}
+.open-btn:hover { background: #125caa; }

@@ -1,0 +1,26 @@
+.demo-section {
+  margin-bottom: 2rem;
+}
+
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.demo-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1976d2;
+}
+
+app-generic-button {
+  margin-bottom: 0.5rem;
+}
+
+.my-gradient-btn {
+  background: linear-gradient(90deg, #7b2ff2, #f357a8);
+  color: #fff !important;
+  box-shadow: 0 3px 12px rgba(123,47,242,0.15);
+}

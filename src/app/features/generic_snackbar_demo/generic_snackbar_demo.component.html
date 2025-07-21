@@ -1,0 +1,21 @@
+<div class="snackbar-demo-btns">
+  <button
+    *ngFor="let demo of demoCases"
+    class="open-btn"
+    (click)="showDemo(demo)"
+  >
+    {{ demo.label }}
+  </button>
+</div>
+
+<div class="demo-note">
+  Try each button for different snackbar positions, actions, icons, avatars, progress, details accordion, and more!
+</div>
+
+<app-snackbar position="top-right" [maxStack]="5"></app-snackbar>
+<app-snackbar position="top-center" [maxStack]="5"></app-snackbar>
+<app-snackbar position="top-left" [maxStack]="5"></app-snackbar>
+<app-snackbar position="bottom-right" [maxStack]="5"></app-snackbar>
+<app-snackbar position="bottom-center" [maxStack]="5"></app-snackbar>
+<app-snackbar position="bottom-left" [maxStack]="5"></app-snackbar>
+<app-snackbar position="center" [maxStack]="3"></app-snackbar>

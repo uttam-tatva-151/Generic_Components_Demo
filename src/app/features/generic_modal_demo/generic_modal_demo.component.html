@@ -1,0 +1,87 @@
+<div class="modal-examples-btns">
+  <!-- Centered Modals -->
+  <button (click)="openModal('center', 'medium')" class="open-btn">Center Medium</button>
+  <button (click)="openModal('center', 'small')" class="open-btn">Center Small</button>
+  <button (click)="openModal('center', 'large')" class="open-btn">Center Large</button>
+  <button (click)="openModal('center', 'fullscreen')" class="open-btn">Center Fullscreen</button>
+  <!-- Left/Right/Top/Bottom -->
+  <button (click)="openModal('left', 'medium')" class="open-btn">Left Drawer</button>
+  <button (click)="openModal('right', 'medium')" class="open-btn">Right Drawer</button>
+  <button (click)="openModal('top', 'medium')" class="open-btn">Top Sheet</button>
+  <button (click)="openModal('bottom', 'medium')" class="open-btn">Bottom Sheet</button>
+  <!-- Mixed -->
+  <button (click)="openModal('left', 'small')" class="open-btn">Left Compact</button>
+  <button (click)="openModal('right', 'large')" class="open-btn">Right Large Drawer</button>
+  <button (click)="openModal('top', 'large')" class="open-btn">Top Large Sheet</button>
+  <button (click)="openModal('bottom', 'small')" class="open-btn">Bottom Compact Sheet</button>
+  <!-- Fun/Custom texts -->
+  <button (click)="openModal('center', 'medium', 'Welcome!')" class="open-btn">Welcome Modal</button>
+  <button (click)="openModal('center', 'small', 'Quick Info')" class="open-btn">Quick Info</button>
+  <button (click)="openModal('center', 'large', 'Survey')" class="open-btn">Survey Modal</button>
+  <button (click)="openModal('left', 'medium', 'Drawer Menu')" class="open-btn">Drawer Menu</button>
+  <button (click)="openModal('right', 'medium', 'Side Panel')" class="open-btn">Side Panel</button>
+  <button (click)="openModal('bottom', 'medium', 'Session Timeout')" class="open-btn">Session Timeout</button>
+  <button (click)="openModal('top', 'medium', 'Announcement')" class="open-btn">Announcement</button>
+  <button (click)="openModal('center', 'fullscreen', 'Full Experience')" class="open-btn">Full Experience</button>
+</div>
+
+<app-modal
+  [(isOpen)]="modalOpen"
+  [title]="modalTitle"
+  [icon]="modalIcon"
+  [position]="modalPosition"
+  [size]="modalSize"
+  [showFooter]="true"
+  [okText]="okText"
+  [cancelText]="cancelText"
+  [closeOnOverlay]="true"
+  [closeOnEsc]="true"
+  [loading]="modalLoading"
+  [disableOk]="modalLoading"
+  [animation]="modalSize === 'fullscreen' ? 'slide' : 'zoom'"
+  [trapFocus]="true"
+  ariaLabel="Supercharged Modal"
+  (ok)="handleOk()"
+  (cancel)="handleCancel()"
+  (closed)="handleClosed()"
+  (afterOpen)="handleAfterOpen()"
+  (afterClose)="handleAfterClose()"
+>
+  <div>
+    <h4>{{modalTitle}}</h4>
+    <p *ngIf="modalTitle === 'Session Timeout'">
+      Your session is about to expire. Click <b>Dismiss</b> to cancel or <b>Confirm</b> to continue.
+    </p>
+    <p *ngIf="modalTitle === 'Announcement'">
+      We have launched a new feature! Check it out.
+    </p>
+    <p *ngIf="modalTitle === 'Welcome!'">
+      Welcome to the app! Explore all our features using the navigation menu.
+    </p>
+    <p *ngIf="modalTitle === 'Survey'">
+      Please take a minute to answer a few questions.
+    </p>
+    <p *ngIf="modalTitle === 'Quick Info'">
+      This is a compact info modal for quick messages.
+    </p>
+    <p *ngIf="modalTitle === 'Full Experience'">
+      This is a fullscreen modal for immersive content.
+    </p>
+    <p *ngIf="modalTitle !== 'Session Timeout'
+             && modalTitle !== 'Announcement'
+             && modalTitle !== 'Welcome!'
+             && modalTitle !== 'Survey'
+             && modalTitle !== 'Quick Info'
+             && modalTitle !== 'Full Experience'">
+      <b>Position:</b> {{modalPosition}}<br>
+      <b>Size:</b> {{modalSize}}<br>
+      Try clicking header, footer, overlay to close.<br>
+      Try <b>Tab</b> key for focus trap.<br>
+      Try loading/disable state.<br>
+    </p>
+    <button (click)="modalLoading = !modalLoading" style="margin-top: 1.2em;">Toggle Loading</button>
+  </div>
+  <button footer-actions class="modal-btn" style="background: #fff; color: #1976d2; border: 1px solid #1976d2;">
+    Extra Action
+  </button>
+</app-modal>

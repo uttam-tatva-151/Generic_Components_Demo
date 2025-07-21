@@ -1,0 +1,37 @@
+<button
+  [type]="type"
+  class="generic-btn
+  {{ customClass ? customClass : '' }}"
+  [class.primary]="btnStyle === 'primary'"
+  [class.secondary]="btnStyle === 'secondary'"
+  [class.outline]="btnStyle === 'outline'"
+  [class.danger]="btnStyle === 'danger'"
+  [class.success]="btnStyle === 'success'"
+  [class.link]="btnStyle === 'link'"
+  [class.sm]="size === 'sm'"
+  [class.lg]="size === 'lg'"
+  [class.block]="block"
+  [disabled]="disabled || loading"
+  [attr.aria-label]="computedAriaLabel"
+  [ngStyle]="customStyle"
+  (click)="onClick($event)"
+>
+  <span
+    *ngIf="loading"
+    class="spinner"
+    aria-hidden="true"
+  ></span>
+  <ng-container *ngIf="icon && iconPosition === 'left' && !loading">
+    <i [class]="icon" class="btn-icon left"></i>
+  </ng-container>
+  <span
+    *ngIf="label"
+    class="btn-label"
+    [class.only-icon]="!label && icon"
+  >
+    {{ label }}
+  </span>
+  <ng-container *ngIf="icon && iconPosition === 'right' && !loading">
+    <i [class]="icon" class="btn-icon right"></i>
+  </ng-container>
+</button>

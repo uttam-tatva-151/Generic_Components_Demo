@@ -1,0 +1,62 @@
+<div class="generic-input-wrapper" [ngClass]="customClass" [ngStyle]="customStyle">
+  <label *ngIf="label" class="input-label" [class.required]="required">{{ label }}</label>
+  <div class="input-row" [class.with-icon]="icon">
+    <i *ngIf="icon && iconPosition === 'prefix'" [class]="icon + ' input-icon prefix'"></i>
+
+    <!-- Textarea -->
+    <textarea
+      *ngIf="type === 'textarea'"
+      #inputEl
+      class="generic-input"
+      [attr.name]="name"
+      [attr.placeholder]="placeholder"
+      [rows]="rows"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [(ngModel)]="value"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+      [attr.aria-label]="label || name"
+      [attr.minlength]="minLength"
+      [attr.maxlength]="maxLength"
+    ></textarea>
+
+    <!-- Input -->
+    <input
+      *ngIf="type !== 'textarea'"
+      #inputEl
+      class="generic-input form-control"
+      [attr.type]="showTogglePassword && showPassword ? 'text' : type"
+      [attr.name]="name"
+      [attr.placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [attr.minlength]="minLength"
+      [attr.maxlength]="maxLength"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.pattern]="pattern"
+      [(ngModel)]="value"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+      [attr.aria-label]="label || name"
+      autocomplete="off"
+    />
+
+    <!-- Toggle password visibility -->
+    <i
+      *ngIf="showTogglePassword && type === 'password'"
+      class="fa-solid input-icon toggle-password"
+      [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="togglePassword()"
+      tabindex="0"
+      [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+    ></i>
+
+    <i *ngIf="icon && iconPosition === 'suffix'" [class]="icon + ' input-icon suffix'"></i>
+  </div>
+  <div class="input-helper" *ngIf="helperText && !internalError">{{ helperText }}</div>
+  <div class="input-error" *ngIf="(touched || internalError) && (internalError || errorText)">
+    {{ errorText || internalError }}
+  </div>
+</div>

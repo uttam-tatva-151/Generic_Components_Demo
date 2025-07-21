@@ -1,0 +1,64 @@
+<div
+  class="snackbar-container"
+  [ngClass]="position"
+  aria-live="polite"
+>
+  <div
+    *ngFor="let s of snackbars"
+    class="snackbar {{s.status}} {{s.customClass || ''}}"
+    [ngStyle]="s.customStyle"
+    [attr.aria-label]="s.ariaLabel || s.title || s.message"
+    [attr.role]="s.status === 'error' ? 'alert' : 'status'"
+    (mouseenter)="pauseAutoClose(s.id!)"
+    (mouseleave)="resumeAutoClose(s.id!)"
+  >
+    <div class="snackbar-avatar" *ngIf="s.avatarUrl">
+      <img [src]="s.avatarUrl" alt="avatar" />
+    </div>
+    <div class="snackbar-icon" *ngIf="s.icon">
+      <i [class]="s.icon"></i>
+    </div>
+    <div class="snackbar-content">
+      <div class="snackbar-title" *ngIf="s.title">{{s.title}}</div>
+      <div class="snackbar-message">{{s.message}}</div>
+      <div class="snackbar-subtitle" *ngIf="s.subtitle">{{s.subtitle}}</div>
+      <!-- Accordion Details Button -->
+      <ng-container *ngIf="s.showDetailsBtn && s.details">
+        <button
+          type="button"
+          class="snackbar-details-toggle"
+          (click)="toggleAccordion(s)"
+        >
+          {{ s.expanded ? 'Hide Details' : 'Show Details' }}
+        </button>
+        <div class="snackbar-details-accordion" *ngIf="s.expanded">
+          {{s.details}}
+        </div>
+      </ng-container>
+      <!-- Legacy details, if not using accordion -->
+      <div class="snackbar-details" *ngIf="s.details && !s.showDetailsBtn">{{s.details}}</div>
+      <a *ngIf="s.link" class="snackbar-link" [href]="s.link.url" target="_blank">{{s.link.text}}</a>
+    </div>
+    <div class="snackbar-actions" *ngIf="s.actions?.length">
+      <button
+        *ngFor="let a of s.actions"
+        [style.background]="a.color"
+        (click)="onAction(s, a)"
+      >
+        <i *ngIf="a.icon" [class]="a.icon"></i> {{a.label}}
+      </button>
+    </div>
+    <button
+      class="snackbar-close"
+      *ngIf="s.showClose !== false"
+      aria-label="Close"
+      (click)="dismiss(s.id!)"
+    >×</button>
+    <!-- Smooth progress bar for autoClose -->
+    <div
+      class="snackbar-progress"
+      *ngIf="s.autoClose"
+      [ngStyle]="getProgressStyle(s)"
+    ></div>
+  </div>
+</div>

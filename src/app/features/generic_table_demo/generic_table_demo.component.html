@@ -1,0 +1,27 @@
+<div class="table-demo-btns">
+  <button
+    *ngFor="let demo of tableDemos; let i=index"
+    class="open-btn"
+    [class.active]="activeConfig === demo.config"
+    (click)="showTable(i)"
+  >
+    {{ demo.label }}
+  </button>
+</div>
+
+<div class="demo-note">
+  Switch between all types: avatars, actions, badges, progress, selection, pagination, expand, dense, sticky, custom chips, etc.
+</div>
+
+<!-- Table display -->
+<app-table [config]="activeConfig"></app-table>
+
+<!-- Template for expandable row demo -->
+<ng-template #expandedRow let-row>
+  <div style="padding: 1em 0;">
+    <strong>Details for {{ row.name }}:</strong>
+    <div>Email: {{ row.email }}</div>
+    <div>Joined: {{ row.date | date:'mediumDate' }}</div>
+    <div>Status: <span [style.color]="row.status === 'active' ? 'green' : row.status === 'inactive' ? 'red' : 'orange'">{{ row.status }}</span></div>
+  </div>
+</ng-template>

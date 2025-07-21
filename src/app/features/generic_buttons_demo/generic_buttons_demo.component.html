@@ -1,0 +1,63 @@
+<div class="d-flex flex-column w-100 gap-3">
+  <h1 class="text-center">Generic Buttons Demo</h1>
+
+
+<!-- Primary button with icon (Font Awesome) -->
+<app-button
+  label="Save"
+  btnStyle="primary"
+  icon="fa-solid fa-floppy-disk"
+  (btnClick)="onSave()">
+</app-button>
+
+<!-- Outline button, right icon, large -->
+<app-button
+  label="Download"
+  btnStyle="outline"
+  size="lg"
+  icon="fa-solid fa-download"
+  iconPosition="right"
+  (btnClick)="onDownload()">
+</app-button>
+
+<!-- Danger button, loading state -->
+<app-button
+  label="Delete"
+  btnStyle="danger"
+  [loading]="isDeleting"
+  icon="fa-solid fa-trash"
+  (btnClick)="onDelete()">
+</app-button>
+
+<!-- Success, block, only icon -->
+<app-button
+  [block]="true"
+  btnStyle="success"
+  icon="fa-solid fa-check"
+  [ariaLabel]="'Confirm'"
+  (btnClick)="onConfirm()">
+</app-button>
+
+<!-- Secondary button, disabled -->
+<app-button
+  label="Disabled"
+  btnStyle="secondary"
+  [disabled]="true">
+</app-button>
+
+<!-- Add a custom class -->
+<app-button
+  label="Gradient"
+  btnStyle="primary"
+  customClass="my-gradient-btn"
+  (btnClick)="onSave()">
+</app-button>
+
+<!-- Add custom inline styles -->
+<app-button
+  label="Big Red"
+  [customStyle]="{ 'background': 'linear-gradient(45deg, #f00, #f90)', 'fontSize': '1.5rem' }"
+  icon="fa-solid fa-fire"
+  (btnClick)="onFire()">
+</app-button>
+</div>

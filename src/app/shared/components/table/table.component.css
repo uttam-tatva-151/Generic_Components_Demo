@@ -1,0 +1,124 @@
+.gen-table-root {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px #0001;
+  font-size: 1em;
+}
+
+.gen-table-root.striped table tbody tr:nth-child(odd) {
+  background: #f7fafd;
+}
+
+.gen-table-root.bordered table {
+  border-collapse: collapse;
+}
+
+.gen-table-root.bordered table,
+.gen-table-root.bordered th,
+.gen-table-root.bordered td {
+  border: 1px solid #e0e0e0;
+}
+
+.gen-table-root.dense td,
+.gen-table-root.dense th {
+  padding: 0.44em 0.5em !important;
+}
+
+.gen-table-root.responsive {
+  overflow-x: auto;
+}
+
+.table-loading,
+.table-empty {
+  text-align: center;
+  color: #888;
+  padding: 2em 0;
+  font-size: 1.16em;
+}
+
+table {
+  width: 100%;
+  border: none;
+}
+
+th,
+td {
+  padding: 0.77em 0.9em;
+  text-align: left;
+}
+
+th.sticky {
+  position: sticky;
+  top: 0;
+  background: #f3f3fc;
+  z-index: 1;
+}
+
+thead.sticky th {
+  position: sticky;
+  top: 0;
+  background: #edf3fa;
+}
+
+.selected {
+  background: #e3f2fd !important;
+}
+
+.avatar {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+
+.chip {
+  display: inline-block;
+  border-radius: 1em;
+  padding: 0.13em 0.85em;
+  background: #e3e0fb;
+  font-size: 0.97em;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #e0e0e0;
+  border-radius: 2px;
+  height: 8px;
+}
+
+.progress-fill {
+  background: #1976d2;
+  height: 8px;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 1em;
+  justify-content: flex-end;
+}
+
+.pagination button {
+  border: none;
+  background: #e3e3f9;
+  color: #333;
+  border-radius: 3px;
+  padding: 0.3em 0.9em;
+  cursor:
+    pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pagination select {
+  border: 1px solid #d2d2f9;
+  border-radius: 3px;
+  padding: 0.2em 0.7em;
+}
