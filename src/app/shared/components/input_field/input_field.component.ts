@@ -88,7 +88,7 @@ export class GenericInputFieldComponent implements ControlValueAccessor {
     this.internalError = null;
     const val = this.value ?? '';
     if (this.required && !val) {
-      this.internalError = 'This field is required';
+      this.internalError = `This ${this.label} is required`;
     } else if (this.minLength && val.length < this.minLength) {
       this.internalError = `Must be at least ${this.minLength} characters`;
     } else if (this.maxLength && val.length > this.maxLength) {
